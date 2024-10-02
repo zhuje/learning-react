@@ -1,4 +1,32 @@
-# 
+# Goal 
+
+This is a react playground. I will be following the tutorials found in the offical React docs: https://react.dev
+
+## /Learn 
+https://react.dev/learn
+
+### Describing the UI 
+- Conditional rendering ✅
+- Rendering List 
+- Keeping components prue 
+- Your UI as a tree
+### Adding Reactivity
+
+### Managing State 
+
+### Escape Hatches 
+
+## /Reference
+Hooks, React-specific components, and React API https://react.dev/reference/react/apis
+
+### react@18.3.1 
+
+#### Hooks 
+#### Components 
+#### APIs
+
+
+
 
 
 
