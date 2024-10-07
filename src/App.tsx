@@ -1,48 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import ListsSimple from "./describing-ui/ListsSimple";
+import ListsAdvanced from "./describing-ui/ListsAdvanced";
 
-interface ItemProps {
-    name: string;
-    isPacked: boolean
-}
+import ConditionalRendering from "./describing-ui/ConditionalRendering";
 
-const PackingItem: React.FC<ItemProps> = ({name, isPacked}) => {
-  if (isPacked) {
-    return <li className="item">{name} ✅</li>;
-  }
-  return <li className="item">{name}</li>;
-}
+const Home = () => {
+  return <h1>Home</h1>;
+};
 
-const PackingList = () => {
+const NoPage = () => {
+  return <h1>404</h1>;
+};
+
+const Layout = () => {
   return (
-    <section>
-      <h1>Sally Ride's Packing List</h1>
-      <ul>
-        <PackingItem 
-          isPacked={true} 
-          name="Space suit" 
-        />
-        <PackingItem 
-          isPacked={true} 
-          name="Helmet with a golden leaf" 
-        />
-        <PackingItem 
-          isPacked={false} 
-          name="Photo of Tam" 
-        />
-      </ul>
-    </section>
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/conditional">Conditional</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+            {/* Route doesn't exist will catch  <Route path="*" element={<NoPage />} /> */}
+          </li>
+          <li>
+            <Link to="/lists-simple"> Lists Simple </Link>
+          </li>
+          <li>
+            <Link to="/lists-advanced"> Lists Advanced</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Outlet />
+    </>
   );
-}
-
-
+};
 
 function App() {
   return (
-    <div>
-      <PackingList />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          {/* Route index will default to the parent path "/" */}
+          <Route path="conditional" element={<ConditionalRendering />} />
+          <Route path="lists-simple" element={<ListsSimple />} />
+          <Route path="lists-advanced" element={<ListsAdvanced />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
